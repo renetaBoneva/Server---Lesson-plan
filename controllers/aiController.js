@@ -42,8 +42,7 @@ exports.generateLessonPlan = async (req, res) => {
     prompt.push("Здравей! Аз съм учител в българско училище. Подготвям се за следващия ми учебен час.");
     prompt.push(`Моля те, да ми помогнеш като ми генерираш план-конспект на урока ${requirements.theme} 
         по предмета ${requirements.course} за ${requirements.class} клас.`);
-    // TODO: Да добавя тип на урока
-    prompt.push(`Типът на урока е ${requirements.type ? requirements.type : "за нови знания"},
+    prompt.push(`Типът на урока е ${requirements.type},
         а продължителността на учебния час е ${requirements.time} минути.`);
     prompt.push(`Нека методическата подготовка да включва като опорни точки учебния предмет, класа, 
         темата на урока, раздел от учебника, тип на урока, продължителност на учебния час${planSkeleton.length > 0 ? ',  ' + planSkeleton.join(', ') : ''}.`);
