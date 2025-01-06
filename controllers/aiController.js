@@ -4,7 +4,9 @@ const config = require('../config/index');
 exports.generateLessonPlan = async (req, res) => {
     const OPEN_AI_KEY = config.OPEN_AI_KEY;
     const openai = new OpenAI({ apiKey: OPEN_AI_KEY });
-    const aiModel = 'gpt-3.5-turbo-0125';
+    // const aiModel = 'gpt-3.5-turbo-0125';
+    const aiModel = 'chatgpt-4o-latest';
+    // const aiModel = 'gpt-4o-mini';
     const requirements = req.body;
 
     const prompt = [];
@@ -44,10 +46,10 @@ exports.generateLessonPlan = async (req, res) => {
         по предмета ${requirements.course} за ${requirements.class} клас.`);
     prompt.push(`Типът на урока е ${requirements.type},
         а продължителността на учебния час е ${requirements.time} минути.`);
-    prompt.push(`Нека методическата подготовка да включва като опорни точки учебния предмет, класа, 
+    prompt.push(`Нека методическата подготовка да включва катоопорни точки учебния предмет, класа, 
         темата на урока, раздел от учебника, тип на урока, продължителност на учебния час${planSkeleton.length > 0 ? ',  ' + planSkeleton.join(', ') : ''}.`);
     prompt.push(`Моля да ми добавиш  и последна точка "Структура и ход на урока", която да 
-        е най-дълга и да включва подточките ${requirements.introduction ? 'Въвеждаща част, ' : ''} изложение на темата${planStructure.length > 0 ? ',  ' + planStructure.join(', ') : ''}.
+        е най-дълга и да включва подробно описани подточките ${requirements.introduction ? 'Въвеждаща част, ' : ''} изложение на темата${planStructure.length > 0 ? ',  ' + planStructure.join(', ') : ''}.
         Нека за всяка подточка да бъде написано в скоби колко минути от часа ще заеме.`);
     prompt.push(`${requirements.notes
         ? `Моля да разгледаш внимателно стойността от полето "Бележки", да прецениш до колко е релевантна със запитването ми и да я вземеш предвид при изготвянето на плана:  ${requirements.notes}. 
