@@ -4,8 +4,8 @@ const config = require('../config/index');
 exports.generateLessonPlan = async (req, res) => {
     const OPEN_AI_KEY = config.OPEN_AI_KEY;
     const openai = new OpenAI({ apiKey: OPEN_AI_KEY });
-    // const aiModel = 'gpt-3.5-turbo-0125';
-    const aiModel = 'chatgpt-4o-latest';
+    const aiModel = 'gpt-3.5-turbo-0125';
+    // const aiModel = 'chatgpt-4o-latest';
     // const aiModel = 'gpt-4o-mini';
     const requirements = req.body;
 

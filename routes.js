@@ -1,4 +1,5 @@
 const aiController = require('./controllers/aiController');
+const authController = require('./controllers/authController');
 
 const router = require('express').Router();
 
@@ -6,6 +7,9 @@ router.get('/', (req, res) => {
     res.send('<h1>Server is running ...</h1>');
 });
 
-router.post('/generateMeLessonPlan', aiController.generateLessonPlan)
+router.post('/register', authController.postRegister);
+router.post('/login', authController.postLogin);
+
+router.post('/generateMeLessonPlan', aiController.generateLessonPlan);
 
 module.exports = router;
