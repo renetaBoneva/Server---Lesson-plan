@@ -1,5 +1,6 @@
 const aiController = require('./controllers/aiController');
 const authController = require('./controllers/authController');
+const { isOwner } = require('./middlewares/authMiddleware');
 
 const router = require('express').Router();
 
@@ -9,6 +10,7 @@ router.get('/', (req, res) => {
 
 router.post('/register', authController.postRegister);
 router.post('/login', authController.postLogin);
+router.delete('/users/:_userID', isOwner, authController.deleteUser);
 
 router.post('/generateMeLessonPlan', aiController.generateLessonPlan);
 

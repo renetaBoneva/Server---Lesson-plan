@@ -5,8 +5,8 @@ const User = require('../models/User');
 const { SECRET } = require('../config');
 
 exports.findOneByEmail = (email) => User.findOne({ email });
+exports.findByIdAndDelete = (_userID) => User.findByIdAndDelete(_userID);
 // exports.findById = (_userID) => User.findById(_userID);
-// exports.findByIdAndDelete = (_userID) => User.findByIdAndDelete(_userID);
 
 exports.register = async ({ email, password, rePass, course, classNum }) => {
     if (password !== rePass) {
@@ -18,7 +18,6 @@ exports.register = async ({ email, password, rePass, course, classNum }) => {
     }
     
     const isExisting = await this.findOneByEmail(email);
-    console.log('here');
 
     if (!!isExisting) {
         throw new Error('Невалиден имейл или парола!');
