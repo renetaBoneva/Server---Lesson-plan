@@ -6,17 +6,16 @@ const { SECRET } = require('../config');
 
 exports.findOneByEmail = (email) => User.findOne({ email });
 exports.findByIdAndDelete = (_userID) => User.findByIdAndDelete(_userID);
-// exports.findById = (_userID) => User.findById(_userID);
 
 exports.register = async ({ email, password, rePass, course, classNum }) => {
     if (password !== rePass) {
         throw new Error('Повторна парола не съвпада с парола!')
     }
-    
+
     if (password.trim().length < 5) {
         throw new Error('Паролата трябва да бъде поне 5 символа!')
     }
-    
+
     const isExisting = await this.findOneByEmail(email);
 
     if (!!isExisting) {
@@ -28,7 +27,7 @@ exports.register = async ({ email, password, rePass, course, classNum }) => {
     try {
         await User.create({ email, password: hashedPassword, course, classNum });
 
-        
+
         const payload = await this.login(email, password);
 
         return payload;
@@ -39,7 +38,6 @@ exports.register = async ({ email, password, rePass, course, classNum }) => {
 
 exports.login = async (email, password) => {
     const user = await this.findOneByEmail(email);
-
 
     if (!user) {
         throw new Error('Невалиден имейл или парола!');
@@ -65,4 +63,26 @@ exports.login = async (email, password) => {
         accessToken
     };
 
+}
+
+exports.findByIdAndUpdate = async (_userID, { email, classNum, course }) => {
+    const user = await User.findByIdAndUpdate(_userID, { email, classNum, course });
+
+    if (!user) {
+        throw new Error('Невалиден имейл или парола!');
+    }
+
+    const payload = {
+        _userID: user?._id,
+        email,
+        course,
+        classNum,
+    };
+ 
+    const accessToken = await jwt.sign(payload, SECRET);
+
+    return {
+        ...payload,
+        accessToken
+    };
 }

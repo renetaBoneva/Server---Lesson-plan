@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
 
 router.post('/register', authController.postRegister);
 router.post('/login', authController.postLogin);
+router.put('/users/:_userID', isOwner, authController.editUser);
 router.delete('/users/:_userID', isOwner, authController.deleteUser);
 
 router.post('/generateMeLessonPlan', aiController.generateLessonPlan);

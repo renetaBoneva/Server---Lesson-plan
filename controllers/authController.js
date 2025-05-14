@@ -23,6 +23,23 @@ exports.postLogin = async (req, res) => {
     }
 };
 
+exports.editUser = async (req, res) => {
+    const { _userID } = req.params;
+    const { newData } = req.body;
+    const email = newData.email;
+    const course = newData.course;
+    const classNum = newData.classNum;
+
+    try {
+        const user = await authService.findByIdAndUpdate(_userID, {  email, classNum, course });
+        
+        return res.json(user);
+    } catch (err) {
+        res.json({ "Error": `${err.message}` });
+    }
+
+}
+
 exports.deleteUser = async (req, res) => {
     const { _userID } = req.params;
 
