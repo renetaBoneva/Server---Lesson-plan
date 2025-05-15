@@ -7,7 +7,7 @@ exports.generateLessonPlan = async (req, res) => {
     const aiModel = 'gpt-3.5-turbo-0125';
     // const aiModel = 'chatgpt-4o-latest';
     // const aiModel = 'gpt-4o-mini';
-    const requirements = req.body;
+    const requirements = req.body;    
 
     const prompt = [];
     let planSkeleton = [];
@@ -43,7 +43,7 @@ exports.generateLessonPlan = async (req, res) => {
 
     prompt.push("Здравей! Аз съм учител в българско училище. Подготвям се за следващия ми учебен час.");
     prompt.push(`Моля те, да ми помогнеш като ми генерираш план-конспект на урока ${requirements.theme} 
-        по предмета ${requirements.course} за ${requirements.class} клас.`);
+        по предмета ${requirements.course} за ${requirements.classNum} клас.`);
     prompt.push(`Типът на урока е ${requirements.type},
         а продължителността на учебния час е ${requirements.time} минути.`);
     prompt.push(`Нека методическата подготовка да включва катоопорни точки учебния предмет, класа, 
