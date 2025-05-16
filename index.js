@@ -7,7 +7,9 @@ const { port, dbConnectionString } = require('./config/index.js');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://front-end-lesson-plan-app.onrender.com'
+}));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(router);
