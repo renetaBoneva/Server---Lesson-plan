@@ -8,7 +8,7 @@ const { port, dbConnectionString } = require('./config/index.js');
 const app = express();
 
 app.use(cors({
-    origin: 'https://front-end-lesson-plan-app.onrender.com',
+    origin: 'https://smart-plan.onrender.com',
     credentials: true
 }));
 app.use(express.urlencoded({ extended: false }));
